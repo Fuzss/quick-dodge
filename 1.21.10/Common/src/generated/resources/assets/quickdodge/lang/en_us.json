@@ -6,7 +6,7 @@
   "enchantment.quickdodge.fleetfoot.desc": "Increases the distance traveled when dodging.",
   "enchantment.quickdodge.shockstep": "Shockstep",
   "enchantment.quickdodge.shockstep.desc": "Damages mobs when dashing through them.",
-  "key.categories.quickdodge": "Quick Dodge",
+  "key.category.quickdodge.main": "Quick Dodge",
   "key.quickdodge.dodge": "Dodge",
   "subtitles.dodge": "Player dodges",
   "tutorial.double_tap_dodge.description": "Double tap %s, %s, %s or %s",

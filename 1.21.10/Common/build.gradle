@@ -5,6 +5,7 @@ dependencies {
     modApi libs.puzzleslib.common
 
     // Player Animation Library
+    api libs.playeranimationlibrarycore.common
     modApi libs.playeranimationlibrary.common
 }
 
