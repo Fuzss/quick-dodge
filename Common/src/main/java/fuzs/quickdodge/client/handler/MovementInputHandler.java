@@ -38,6 +38,7 @@ public class MovementInputHandler {
         if (dodgingCooldown > 0) {
             dodgingCooldown--;
         }
+
         if (QuickDodge.CONFIG.get(ClientConfig.class).doubleTapMode) {
             doubleTapInputHandler(player);
         }
@@ -47,6 +48,7 @@ public class MovementInputHandler {
         if (dodgeTriggerTime > 0) {
             dodgeTriggerTime--;
         }
+
         Vec2 moveVector = player.input.getMoveVector();
         if (moveVector.lengthSquared() >= MINIMUM_DODGING_IMPULSE_SQUARE) {
             if (!hasEnoughImpulseToStartDodging) {
@@ -62,6 +64,7 @@ public class MovementInputHandler {
         } else {
             hasEnoughImpulseToStartDodging = false;
         }
+
         if (QuickDodge.CONFIG.get(ClientConfig.class).preventDoubleTapSprinting) {
             player.sprintTriggerTime = 0;
         }
@@ -80,7 +83,7 @@ public class MovementInputHandler {
 
             dodgingCooldown = QuickDodge.CONFIG.get(ServerConfig.class).cooldownTime;
             DodgeEffectsHandler.setDodging(player);
-            PlayerAnimationHandler.animatePlayer(dodgeDirection, player);
+            PlayerAnimationHandler.playPlayerAnimation(player, dodgeDirection);
             MessageSender.broadcast(new ServerboundTriggerDodgeMessage(dodgeDirection));
         }
     }
@@ -95,10 +98,17 @@ public class MovementInputHandler {
     }
 
     private static boolean isAbleToDodge(Player player) {
-        return (player.onGround() || EnchantingHelper.has(player,
-                ModRegistry.DODGE_WHILST_AIRBORNE_ENCHANTMENT_EFFECT_COMPONENT_TYPE.value())) && !player.isPassenger()
-                && !player.isShiftKeyDown() && !player.isUnderWater() && !player.isUsingItem() && !player.isFallFlying()
-                && !player.getAbilities().flying && !player.isSleeping() && !player.isAutoSpinAttack()
-                && !player.hasEffect(MobEffects.BLINDNESS);
+        if (!player.onGround() && !EnchantingHelper.has(player,
+                ModRegistry.DODGE_WHILST_AIRBORNE_ENCHANTMENT_EFFECT_COMPONENT_TYPE.value())) {
+            return false;
+        } else if (player.isPassenger() || player.isSleeping() || player.hasEffect(MobEffects.BLINDNESS)) {
+            return false;
+        } else if (player.isShiftKeyDown() || player.isUnderWater() || player.isUsingItem()) {
+            return false;
+        } else if (player.getAbilities().flying || player.isFallFlying() || player.isAutoSpinAttack()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

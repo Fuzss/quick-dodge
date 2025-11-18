@@ -1,37 +1,34 @@
 package fuzs.quickdodge.client.handler;
 
-import fuzs.quickdodge.util.DodgeDirection;
-import dev.kosmx.playerAnim.api.layered.AnimationStack;
-import dev.kosmx.playerAnim.api.layered.IAnimation;
-import dev.kosmx.playerAnim.api.layered.KeyframeAnimationPlayer;
-import dev.kosmx.playerAnim.api.layered.ModifierLayer;
-import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
-import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
-import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
+import com.zigythebird.playeranim.animation.PlayerAnimationController;
+import com.zigythebird.playeranim.api.PlayerAnimationAccess;
+import com.zigythebird.playeranim.api.PlayerAnimationFactory;
+import com.zigythebird.playeranimcore.animation.AnimationController;
+import com.zigythebird.playeranimcore.animation.AnimationData;
+import com.zigythebird.playeranimcore.enums.PlayState;
 import fuzs.quickdodge.QuickDodge;
-import net.minecraft.client.player.AbstractClientPlayer;
+import fuzs.quickdodge.util.DodgeDirection;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Avatar;
 
 public class PlayerAnimationHandler {
     private static final ResourceLocation PLAYER_ASSOCIATED_DATA_LOCATION = QuickDodge.id("animation");
 
-    public static void registerAnimation() {
-        PlayerAnimationAccess.REGISTER_ANIMATION_EVENT.register((AbstractClientPlayer player, AnimationStack animationStack) -> {
-            ModifierLayer<IAnimation> layer = new ModifierLayer<>();
-            animationStack.addAnimLayer(1024, layer);
-            PlayerAnimationAccess.getPlayerAssociatedData(player).set(PLAYER_ASSOCIATED_DATA_LOCATION, layer);
-        });
+    public static void registerPlayerAnimations() {
+        PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(PLAYER_ASSOCIATED_DATA_LOCATION,
+                1024,
+                (Avatar avatar) -> {
+                    return new PlayerAnimationController(avatar,
+                            (AnimationController controller, AnimationData state, AnimationController.AnimationSetter animationSetter) -> {
+                                return PlayState.STOP;
+                            });
+                });
     }
 
-    @SuppressWarnings("unchecked")
-    public static void animatePlayer(DodgeDirection dodgeDirection, AbstractClientPlayer player) {
-        ModifierLayer<IAnimation> layer = (ModifierLayer<IAnimation>) PlayerAnimationAccess.getPlayerAssociatedData(
-                player).get(PLAYER_ASSOCIATED_DATA_LOCATION);
-        if (layer != null) {
-            KeyframeAnimation animation = (KeyframeAnimation) PlayerAnimationRegistry.getAnimation(dodgeDirection.animationLocation);
-            if (animation != null) {
-                layer.setAnimation(new KeyframeAnimationPlayer(animation));
-            }
+    public static void playPlayerAnimation(Avatar avatar, DodgeDirection dodgeDirection) {
+        if (PlayerAnimationAccess.getPlayerAnimationLayer(avatar,
+                PLAYER_ASSOCIATED_DATA_LOCATION) instanceof PlayerAnimationController controller) {
+            controller.triggerAnimation(dodgeDirection.animationLocation);
         }
     }
 }

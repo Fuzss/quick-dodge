@@ -1,4 +1,4 @@
-package fuzs.quickdodge.data;
+package fuzs.quickdodge.data.tags;
 
 import fuzs.puzzleslib.api.data.v2.core.DataProviderContext;
 import fuzs.puzzleslib.api.data.v2.tags.AbstractTagProvider;

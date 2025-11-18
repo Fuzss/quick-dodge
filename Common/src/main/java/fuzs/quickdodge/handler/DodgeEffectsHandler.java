@@ -34,15 +34,17 @@ public class DodgeEffectsHandler {
 
     public static void onPlayerTickEnd(Player player) {
         DodgeData dodgeData = ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.get(player);
-        if (dodgeData.remainingDodgeTicks().intValue() > 0) {
+        if (dodgeData != null && dodgeData.remainingDodgeTicks().intValue() > 0) {
             dodgeData.remainingDodgeTicks().decrement();
             if (originalBoundingBox != null) {
                 checkBashAttack(player, originalBoundingBox, dodgeData);
             }
+
             if (dodgeData.remainingDodgeTicks().intValue() == 0) {
                 dodgeData.bashedEntityIds().clear();
             }
         }
+
         originalBoundingBox = null;
     }
 
@@ -73,9 +75,11 @@ public class DodgeEffectsHandler {
                         }
                     }
                 }
+
                 return;
             }
         }
+
         if (player.horizontalCollision) {
             dodgeData.remainingDodgeTicks().setValue(0);
         }
@@ -97,12 +101,14 @@ public class DodgeEffectsHandler {
     public static void setDodging(Player player) {
         if (QuickDodge.CONFIG.get(ServerConfig.class).shrinkSizeWhilstDodging) {
             DodgeData dodgeData = ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.get(player);
-            dodgeData.remainingDodgeTicks().setValue(DODGE_MOMENTUM_TICKS);
+            if (dodgeData != null) {
+                dodgeData.remainingDodgeTicks().setValue(DODGE_MOMENTUM_TICKS);
+            }
         }
     }
 
     public static boolean isDodging(Player player) {
         DodgeData dodgeData = ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.get(player);
-        return dodgeData.remainingDodgeTicks().intValue() > 0;
+        return dodgeData != null && dodgeData.remainingDodgeTicks().intValue() > 0;
     }
 }

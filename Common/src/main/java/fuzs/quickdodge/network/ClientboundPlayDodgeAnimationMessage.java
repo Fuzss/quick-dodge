@@ -25,8 +25,8 @@ public record ClientboundPlayDodgeAnimationMessage(int entityId,
             public void accept(Context context) {
                 if (context.level()
                         .getEntity(ClientboundPlayDodgeAnimationMessage.this.entityId) instanceof AbstractClientPlayer player) {
-                    PlayerAnimationHandler.animatePlayer(ClientboundPlayDodgeAnimationMessage.this.dodgeDirection,
-                            player);
+                    PlayerAnimationHandler.playPlayerAnimation(player,
+                            ClientboundPlayDodgeAnimationMessage.this.dodgeDirection);
                 }
             }
         };

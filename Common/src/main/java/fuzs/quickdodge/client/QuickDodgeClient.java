@@ -33,7 +33,7 @@ public class QuickDodgeClient implements ClientModConstructor {
 
     @Override
     public void onClientSetup() {
-        PlayerAnimationHandler.registerAnimation();
+        PlayerAnimationHandler.registerPlayerAnimations();
     }
 
     @Override
