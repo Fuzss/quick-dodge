@@ -27,7 +27,7 @@ public class QuickDodgeClient implements ClientModConstructor {
 
     private static void registerEventHandlers() {
         ClientTickEvents.END.register(DodgingToast::onEndClientTick);
-        ClientPlayerNetworkEvents.LOGGED_IN.register(DodgingToast::onLoggedIn);
+        ClientPlayerNetworkEvents.JOIN.register(DodgingToast::onPlayerJoin);
         MovementInputUpdateCallback.EVENT.register(MovementInputHandler::onMovementInputUpdate);
     }
 

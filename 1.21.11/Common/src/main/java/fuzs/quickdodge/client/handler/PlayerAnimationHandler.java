@@ -8,11 +8,11 @@ import com.zigythebird.playeranimcore.animation.AnimationData;
 import com.zigythebird.playeranimcore.enums.PlayState;
 import fuzs.quickdodge.QuickDodge;
 import fuzs.quickdodge.util.DodgeDirection;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Avatar;
 
 public class PlayerAnimationHandler {
-    private static final ResourceLocation PLAYER_ASSOCIATED_DATA_LOCATION = QuickDodge.id("animation");
+    private static final Identifier PLAYER_ASSOCIATED_DATA_LOCATION = QuickDodge.id("animation");
 
     public static void registerPlayerAnimations() {
         PlayerAnimationFactory.ANIMATION_DATA_FACTORY.registerFactory(PLAYER_ASSOCIATED_DATA_LOCATION,

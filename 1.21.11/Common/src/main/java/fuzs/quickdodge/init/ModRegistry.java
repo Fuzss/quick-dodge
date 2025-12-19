@@ -85,8 +85,7 @@ public class ModRegistry {
                                 4,
                                 EquipmentSlotGroup.FEET))
                         .withEffect(EnchantmentEffectComponents.ATTRIBUTES,
-                                new EnchantmentAttributeEffect(ResourceKeyHelper.getResourceLocation(
-                                        FLEETFOOT_ENCHANTMENT),
+                                new EnchantmentAttributeEffect(ResourceKeyHelper.getIdentifier(FLEETFOOT_ENCHANTMENT),
                                         DODGE_STRENGTH_ATTRIBUTE,
                                         LevelBasedValue.perLevel(0.3F),
                                         AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
