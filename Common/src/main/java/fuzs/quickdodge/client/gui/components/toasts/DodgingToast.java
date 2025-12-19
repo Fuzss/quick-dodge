@@ -14,13 +14,13 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.tutorial.Tutorial;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class DodgingToast extends TutorialToast {
-    private static final ResourceLocation BACKGROUND_SPRITE = ResourceLocation.withDefaultNamespace("toast/tutorial");
-    private static final ResourceLocation DODGE_SPRITE = QuickDodge.id("toast/dodge");
+    private static final Identifier BACKGROUND_SPRITE = Identifier.withDefaultNamespace("toast/tutorial");
+    private static final Identifier DODGE_SPRITE = QuickDodge.id("toast/dodge");
     public static final Component SINGLE_TAP_TITLE_COMPONENT = Component.translatable("tutorial.single_tap_dodge.title");
     public static final Component SINGLE_TAP_DESCRIPTION_COMPONENT = Component.translatable(
             "tutorial.single_tap_dodge.description",
@@ -52,7 +52,7 @@ public class DodgingToast extends TutorialToast {
         }
     }
 
-    public static void onLoggedIn(LocalPlayer player, MultiPlayerGameMode multiPlayerGameMode, Connection connection) {
+    public static void onPlayerJoin(LocalPlayer player, MultiPlayerGameMode multiPlayerGameMode, Connection connection) {
         timeWaiting = 0;
     }
 

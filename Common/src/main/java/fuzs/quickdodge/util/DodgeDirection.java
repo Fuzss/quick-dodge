@@ -5,7 +5,7 @@ import fuzs.puzzleslib.api.network.v4.codec.ExtraStreamCodecs;
 import fuzs.quickdodge.QuickDodge;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.phys.Vec2;
@@ -37,7 +37,7 @@ public enum DodgeDirection implements StringRepresentable {
 
     private final int leftImpulse;
     private final int forwardImpulse;
-    public final ResourceLocation animationLocation;
+    public final Identifier animationLocation;
 
     DodgeDirection(int leftImpulse, int forwardImpulse) {
         this.leftImpulse = leftImpulse;
