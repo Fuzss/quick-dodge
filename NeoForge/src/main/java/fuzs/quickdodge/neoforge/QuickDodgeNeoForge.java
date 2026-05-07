@@ -2,9 +2,9 @@ package fuzs.quickdodge.neoforge;
 
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
-import fuzs.quickdodge.QuickDodge;
-import fuzs.quickdodge.data.tags.ModEnchantmentTagsProvider;
-import fuzs.quickdodge.init.ModRegistry;
+import fuzs.quickdodge.common.QuickDodge;
+import fuzs.quickdodge.common.data.tags.ModEnchantmentTagsProvider;
+import fuzs.quickdodge.common.init.ModRegistry;
 import net.neoforged.fml.common.Mod;
 
 @Mod(QuickDodge.MOD_ID)

@@ -1,6 +1,6 @@
 package fuzs.quickdodge.fabric;
 
-import fuzs.quickdodge.QuickDodge;
+import fuzs.quickdodge.common.QuickDodge;
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
 import net.fabricmc.api.ModInitializer;
 

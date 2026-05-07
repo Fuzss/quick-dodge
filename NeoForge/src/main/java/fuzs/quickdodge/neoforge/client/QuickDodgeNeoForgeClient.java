@@ -2,9 +2,9 @@ package fuzs.quickdodge.neoforge.client;
 
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
-import fuzs.quickdodge.QuickDodge;
-import fuzs.quickdodge.client.QuickDodgeClient;
-import fuzs.quickdodge.data.client.ModLanguageProvider;
+import fuzs.quickdodge.common.QuickDodge;
+import fuzs.quickdodge.common.client.QuickDodgeClient;
+import fuzs.quickdodge.common.data.client.ModLanguageProvider;
 import fuzs.quickdodge.neoforge.data.client.ModSoundProvider;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.common.Mod;
