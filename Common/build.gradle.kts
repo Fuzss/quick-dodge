@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-    modCompileOnlyApi(libs.puzzleslib.common)
-    modCompileOnlyApi(libs.bundles.playeranimationlibrary.common)
+    modCompileOnlyApi(sharedLibs.puzzleslib.common)
+    modCompileOnlyApi(sharedLibs.bundles.playeranimationlibrary.common)
 }
 
 multiloader {

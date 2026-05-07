@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    modCompileOnly(libs.puzzleslib.common)
-    modApi(libs.puzzleslib.neoforge)
-    modApi(libs.playeranimationlibrary.neoforge)
+    modCompileOnly(sharedLibs.puzzleslib.common)
+    modApi(sharedLibs.puzzleslib.neoforge)
+    modApi(sharedLibs.playeranimationlibrary.neoforge)
 }

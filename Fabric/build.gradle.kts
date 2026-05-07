@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    modApi(libs.fabricapi.fabric)
-    modApi(libs.puzzleslib.fabric)
-    modApi(libs.playeranimationlibrary.fabric)
+    modApi(sharedLibs.fabricapi.fabric)
+    modApi(sharedLibs.puzzleslib.fabric)
+    modApi(sharedLibs.playeranimationlibrary.fabric)
 }
