@@ -1,9 +1,9 @@
 package fuzs.quickdodge.network;
 
-import fuzs.puzzleslib.api.network.v4.MessageSender;
-import fuzs.puzzleslib.api.network.v4.PlayerSet;
-import fuzs.puzzleslib.api.network.v4.message.MessageListener;
-import fuzs.puzzleslib.api.network.v4.message.play.ServerboundPlayMessage;
+import fuzs.puzzleslib.common.api.network.v4.MessageSender;
+import fuzs.puzzleslib.common.api.network.v4.PlayerSet;
+import fuzs.puzzleslib.common.api.network.v4.message.MessageListener;
+import fuzs.puzzleslib.common.api.network.v4.message.play.ServerboundPlayMessage;
 import fuzs.quickdodge.QuickDodge;
 import fuzs.quickdodge.config.ServerConfig;
 import fuzs.quickdodge.handler.DodgeEffectsHandler;
@@ -11,6 +11,7 @@ import fuzs.quickdodge.init.ModRegistry;
 import fuzs.quickdodge.util.DodgeDirection;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityEvent;
@@ -26,27 +27,26 @@ public record ServerboundTriggerDodgeMessage(DodgeDirection dodgeDirection) impl
         return new MessageListener<Context>() {
             @Override
             public void accept(Context context) {
-
-                ServerPlayer player = context.player();
-
+                ServerLevel serverLevel = context.level();
+                ServerPlayer serverPlayer = context.player();
                 if (QuickDodge.CONFIG.get(ServerConfig.class).dodgeSound) {
-                    context.level()
-                            .playSound(null,
-                                    player,
-                                    ModRegistry.DODGE_SOUND_EVENT.value(),
-                                    SoundSource.PLAYERS,
-                                    1.0F,
-                                    4.0F + context.level().random.nextFloat());
-                }
-                if (QuickDodge.CONFIG.get(ServerConfig.class).poofParticles) {
-                    context.level().broadcastEntityEvent(player, EntityEvent.POOF);
+                    serverLevel.playSound(null,
+                            serverPlayer,
+                            ModRegistry.DODGE_SOUND_EVENT.value(),
+                            SoundSource.PLAYERS,
+                            1.0F,
+                            4.0F + serverLevel.getRandom().nextFloat());
                 }
 
-                player.invulnerableTime = Math.max(player.invulnerableTime,
+                if (QuickDodge.CONFIG.get(ServerConfig.class).poofParticles) {
+                    serverLevel.broadcastEntityEvent(serverPlayer, EntityEvent.POOF);
+                }
+
+                serverPlayer.invulnerableTime = Math.max(serverPlayer.invulnerableTime,
                         QuickDodge.CONFIG.get(ServerConfig.class).invincibilityTicks);
-                DodgeEffectsHandler.setDodging(player);
-                MessageSender.broadcast(PlayerSet.nearPlayer(player),
-                        new ClientboundPlayDodgeAnimationMessage(player.getId(),
+                DodgeEffectsHandler.setDodging(serverPlayer);
+                MessageSender.broadcast(PlayerSet.nearPlayer(serverPlayer),
+                        new ClientboundPlayDodgeAnimationMessage(serverPlayer.getId(),
                                 ServerboundTriggerDodgeMessage.this.dodgeDirection));
             }
         };

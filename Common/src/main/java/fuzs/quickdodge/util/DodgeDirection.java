@@ -1,7 +1,7 @@
 package fuzs.quickdodge.util;
 
 import com.google.common.collect.ImmutableMap;
-import fuzs.puzzleslib.api.network.v4.codec.ExtraStreamCodecs;
+import fuzs.puzzleslib.common.api.network.v4.codec.ExtraStreamCodecs;
 import fuzs.quickdodge.QuickDodge;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;

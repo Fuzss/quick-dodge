@@ -1,6 +1,6 @@
 package fuzs.quickdodge.handler;
 
-import fuzs.puzzleslib.api.item.v2.EnchantingHelper;
+import fuzs.puzzleslib.common.api.item.v2.EnchantingHelper;
 import fuzs.quickdodge.QuickDodge;
 import fuzs.quickdodge.attachment.DodgeData;
 import fuzs.quickdodge.config.ServerConfig;

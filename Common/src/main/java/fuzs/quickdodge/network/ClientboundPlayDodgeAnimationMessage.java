@@ -2,8 +2,8 @@ package fuzs.quickdodge.network;
 
 import fuzs.quickdodge.client.handler.PlayerAnimationHandler;
 import fuzs.quickdodge.util.DodgeDirection;
-import fuzs.puzzleslib.api.network.v4.message.MessageListener;
-import fuzs.puzzleslib.api.network.v4.message.play.ClientboundPlayMessage;
+import fuzs.puzzleslib.common.api.network.v4.message.MessageListener;
+import fuzs.puzzleslib.common.api.network.v4.message.play.ClientboundPlayMessage;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.codec.ByteBufCodecs;

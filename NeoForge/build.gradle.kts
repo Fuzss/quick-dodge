@@ -2,8 +2,20 @@ plugins {
     id("fuzs.multiloader.multiloader-convention-plugins-neoforge")
 }
 
+configurations.configureEach {
+    resolutionStrategy {
+        force("io.netty:netty-buffer:4.2.7.Final")
+    }
+}
+
+repositories {
+    maven {
+        name = "RedlanceMinecraft"
+        url = uri("https://repo.redlance.org/public")
+    }
+}
+
 dependencies {
-    modCompileOnly(sharedLibs.puzzleslib.common)
     modApi(sharedLibs.puzzleslib.neoforge)
-    modApi(sharedLibs.playeranimationlibrary.neoforge)
+    api(sharedLibs.playeranimationlibrary.neoforge)
 }

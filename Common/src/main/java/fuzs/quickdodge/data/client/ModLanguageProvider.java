@@ -1,7 +1,7 @@
 package fuzs.quickdodge.data.client;
 
-import fuzs.puzzleslib.api.client.data.v2.AbstractLanguageProvider;
-import fuzs.puzzleslib.api.data.v2.core.DataProviderContext;
+import fuzs.puzzleslib.common.api.client.data.v2.AbstractLanguageProvider;
+import fuzs.puzzleslib.common.api.data.v2.core.DataProviderContext;
 import fuzs.quickdodge.QuickDodge;
 import fuzs.quickdodge.client.QuickDodgeClient;
 import fuzs.quickdodge.client.gui.components.toasts.DodgingToast;

@@ -1,13 +1,13 @@
 package fuzs.quickdodge.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
-import fuzs.puzzleslib.api.client.core.v1.context.KeyMappingsContext;
-import fuzs.puzzleslib.api.client.event.v1.ClientTickEvents;
-import fuzs.puzzleslib.api.client.event.v1.entity.player.ClientPlayerNetworkEvents;
-import fuzs.puzzleslib.api.client.event.v1.entity.player.MovementInputUpdateCallback;
-import fuzs.puzzleslib.api.client.key.v1.KeyActivationHandler;
-import fuzs.puzzleslib.api.client.key.v1.KeyMappingHelper;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.context.KeyMappingsContext;
+import fuzs.puzzleslib.common.api.client.event.v1.ClientTickEvents;
+import fuzs.puzzleslib.common.api.client.event.v1.entity.player.ClientPlayerNetworkEvents;
+import fuzs.puzzleslib.common.api.client.event.v1.entity.player.MovementInputUpdateCallback;
+import fuzs.puzzleslib.common.api.client.key.v1.KeyActivationHandler;
+import fuzs.puzzleslib.common.api.client.key.v1.KeyMappingHelper;
 import fuzs.quickdodge.QuickDodge;
 import fuzs.quickdodge.client.gui.components.toasts.DodgingToast;
 import fuzs.quickdodge.client.handler.MovementInputHandler;

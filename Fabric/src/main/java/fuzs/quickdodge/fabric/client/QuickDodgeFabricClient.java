@@ -2,7 +2,7 @@ package fuzs.quickdodge.fabric.client;
 
 import fuzs.quickdodge.QuickDodge;
 import fuzs.quickdodge.client.QuickDodgeClient;
-import fuzs.puzzleslib.api.client.core.v1.ClientModConstructor;
+import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
 import net.fabricmc.api.ClientModInitializer;
 
 public class QuickDodgeFabricClient implements ClientModInitializer {

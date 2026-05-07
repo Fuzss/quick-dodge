@@ -1,7 +1,7 @@
 package fuzs.quickdodge.client.handler;
 
-import fuzs.puzzleslib.api.item.v2.EnchantingHelper;
-import fuzs.puzzleslib.api.network.v4.MessageSender;
+import fuzs.puzzleslib.common.api.item.v2.EnchantingHelper;
+import fuzs.puzzleslib.common.api.network.v4.MessageSender;
 import fuzs.quickdodge.QuickDodge;
 import fuzs.quickdodge.config.ClientConfig;
 import fuzs.quickdodge.config.ServerConfig;

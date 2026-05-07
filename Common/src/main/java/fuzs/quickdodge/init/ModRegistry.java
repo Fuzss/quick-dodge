@@ -1,10 +1,10 @@
 package fuzs.quickdodge.init;
 
-import fuzs.puzzleslib.api.attachment.v4.DataAttachmentRegistry;
-import fuzs.puzzleslib.api.attachment.v4.DataAttachmentType;
-import fuzs.puzzleslib.api.data.v2.AbstractDatapackRegistriesProvider;
-import fuzs.puzzleslib.api.init.v3.registry.RegistryManager;
-import fuzs.puzzleslib.api.init.v3.registry.ResourceKeyHelper;
+import fuzs.puzzleslib.common.api.attachment.v4.DataAttachmentRegistry;
+import fuzs.puzzleslib.common.api.attachment.v4.DataAttachmentType;
+import fuzs.puzzleslib.common.api.data.v2.AbstractDatapackRegistriesProvider;
+import fuzs.puzzleslib.common.api.init.v3.registry.RegistryManager;
+import fuzs.puzzleslib.common.api.init.v3.registry.ResourceKeyHelper;
 import fuzs.quickdodge.QuickDodge;
 import fuzs.quickdodge.attachment.DodgeData;
 import net.minecraft.core.Holder;
@@ -45,12 +45,15 @@ public class ModRegistry {
             0.0,
             1024.0);
     public static final Holder.Reference<SoundEvent> DODGE_SOUND_EVENT = REGISTRIES.registerSoundEvent("dodge");
+    /**
+     * @see EnchantmentEffectComponents#MOB_EXPERIENCE
+     */
     public static final Holder.Reference<DataComponentType<List<ConditionalEffect<EnchantmentValueEffect>>>> BASHING_DAMAGE_ENCHANTMENT_EFFECT_COMPONENT_TYPE = REGISTRIES.register(
             Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE,
             "bashing_damage",
             () -> DataComponentType.<List<ConditionalEffect<EnchantmentValueEffect>>>builder()
-                    .persistent(ConditionalEffect.codec(EnchantmentValueEffect.CODEC,
-                            LootContextParamSets.ENCHANTED_ENTITY).listOf())
+                    .persistent(EnchantmentEffectComponents.validatedListCodec(ConditionalEffect.codec(
+                            EnchantmentValueEffect.CODEC), LootContextParamSets.ENCHANTED_ENTITY))
                     .build());
     public static final Holder.Reference<DataComponentType<EnchantmentValueEffect>> ENTITY_BASHING_ENCHANTMENT_EFFECT_COMPONENT_TYPE = REGISTRIES.register(
             Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE,

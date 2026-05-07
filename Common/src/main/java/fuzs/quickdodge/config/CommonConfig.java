@@ -1,7 +1,7 @@
 package fuzs.quickdodge.config;
 
-import fuzs.puzzleslib.api.config.v3.Config;
-import fuzs.puzzleslib.api.config.v3.ConfigCore;
+import fuzs.puzzleslib.common.api.config.v3.Config;
+import fuzs.puzzleslib.common.api.config.v3.ConfigCore;
 
 public class CommonConfig implements ConfigCore {
     @Config(description = "How far the player moves when dodging.", gameRestart = true)

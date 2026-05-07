@@ -6,7 +6,7 @@ import fuzs.quickdodge.config.ClientConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.TutorialToast;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.client.player.LocalPlayer;
@@ -16,6 +16,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
+import net.minecraft.util.FormattedCharSequence;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class DodgingToast extends TutorialToast {
@@ -67,7 +68,9 @@ public class DodgingToast extends TutorialToast {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, Font font, long visibilityTime) {
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, Font font, long visibilityTime) {
+        // TODO check what is required here
+
         // copied from super method
         int i = this.height();
         guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, 0, 0, this.width(), i);
@@ -76,7 +79,17 @@ public class DodgingToast extends TutorialToast {
         int k = 7 + (this.contentHeight() - j) / 2;
 
         for (int l = 0; l < this.lines.size(); l++) {
-            guiGraphics.drawString(font, this.lines.get(l), 30, k + l * 11, ARGB.opaque(0), false);
+            guiGraphics.text(font, this.lines.get(l), 30, k + l * 11, ARGB.opaque(0), false);
         }
+
+//        int height = this.height();
+//        graphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, 0, 0, this.width(), height);
+//        this.icon.extractRenderState(graphics, 6, 6);
+//        int textHeight = this.lines.size() * 11;
+//        int textTop = 7 + (this.contentHeight() - textHeight) / 2;
+//
+//        for(int i = 0; i < this.lines.size(); ++i) {
+//            graphics.text(font, (FormattedCharSequence)this.lines.get(i), 30, textTop + i * 11, -16777216, false);
+//        }
     }
 }
