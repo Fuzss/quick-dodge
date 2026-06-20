@@ -83,7 +83,8 @@ public class MovementInputHandler {
 
             dodgingCooldown = QuickDodge.CONFIG.get(ServerConfig.class).cooldownTime;
             DodgeEffectsHandler.setDodging(player);
-            PlayerAnimationHandler.playPlayerAnimation(player, dodgeDirection);
+            // TODO enable this again
+//            PlayerAnimationHandler.playPlayerAnimation(player, dodgeDirection);
             MessageSender.broadcast(new ServerboundTriggerDodgeMessage(dodgeDirection));
         }
     }

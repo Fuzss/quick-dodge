@@ -19,7 +19,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypeIds;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -68,8 +68,10 @@ public class ModRegistry {
     public static final ResourceKey<Enchantment> SHOCKSTEP_ENCHANTMENT = REGISTRIES.registerEnchantment("shockstep");
 
     public static final DataAttachmentType<Entity, DodgeData> DODGE_DATA_ATTACHMENT_TYPE = DataAttachmentRegistry.<DodgeData>entityBuilder()
-            .defaultValue((Entity entity) -> entity.getType() == EntityType.PLAYER,
-                    (RegistryAccess registries) -> new DodgeData())
+            .defaultValue((Entity entity) -> entity.is(EntityTypeIds.PLAYER), (RegistryAccess registries) -> {
+                // This is mutable, so we need a new instance everytime.
+                return new DodgeData();
+            })
             .build(QuickDodge.id("dodge_data"));
 
     public static void bootstrap() {

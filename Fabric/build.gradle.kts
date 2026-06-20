@@ -12,5 +12,5 @@ repositories {
 dependencies {
     modApi(sharedLibs.fabricapi.fabric)
     modApi(sharedLibs.puzzleslib.fabric)
-    api(sharedLibs.playeranimationlibrary.fabric)
+//    api(sharedLibs.playeranimationlibrary.fabric)
 }

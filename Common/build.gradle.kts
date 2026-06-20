@@ -17,7 +17,7 @@ repositories {
 
 dependencies {
     modCompileOnlyApi(sharedLibs.puzzleslib.common)
-    compileOnlyApi(sharedLibs.bundles.playeranimationlibrary.common)
+//    compileOnlyApi(sharedLibs.bundles.playeranimationlibrary.common)
 }
 
 multiloader {

@@ -17,5 +17,5 @@ repositories {
 
 dependencies {
     modApi(sharedLibs.puzzleslib.neoforge)
-    api(sharedLibs.playeranimationlibrary.neoforge)
+//    api(sharedLibs.playeranimationlibrary.neoforge)
 }

@@ -1,9 +1,8 @@
 package fuzs.quickdodge.common.network;
 
-import fuzs.quickdodge.common.client.handler.PlayerAnimationHandler;
-import fuzs.quickdodge.common.util.DodgeDirection;
 import fuzs.puzzleslib.common.api.network.v4.message.MessageListener;
 import fuzs.puzzleslib.common.api.network.v4.message.play.ClientboundPlayMessage;
+import fuzs.quickdodge.common.util.DodgeDirection;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -25,8 +24,9 @@ public record ClientboundPlayDodgeAnimationMessage(int entityId,
             public void accept(Context context) {
                 if (context.level()
                         .getEntity(ClientboundPlayDodgeAnimationMessage.this.entityId) instanceof AbstractClientPlayer player) {
-                    PlayerAnimationHandler.playPlayerAnimation(player,
-                            ClientboundPlayDodgeAnimationMessage.this.dodgeDirection);
+                    // TODO enable this again
+//                    PlayerAnimationHandler.playPlayerAnimation(player,
+//                            ClientboundPlayDodgeAnimationMessage.this.dodgeDirection);
                 }
             }
         };

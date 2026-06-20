@@ -17,7 +17,7 @@ public class ModEnchantmentTagsProvider extends AbstractTagProvider<Enchantment>
     @Override
     public void addTags(HolderLookup.Provider registries) {
         this.tag(EnchantmentTags.NON_TREASURE)
-                .addKey(ModRegistry.FLEETFOOT_ENCHANTMENT,
+                .add(ModRegistry.FLEETFOOT_ENCHANTMENT,
                         ModRegistry.AIRSTRIDE_ENCHANTMENT,
                         ModRegistry.SHOCKSTEP_ENCHANTMENT);
     }

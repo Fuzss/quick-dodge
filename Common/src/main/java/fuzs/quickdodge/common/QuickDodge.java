@@ -13,7 +13,7 @@ import fuzs.quickdodge.common.init.ModRegistry;
 import fuzs.quickdodge.common.network.ClientboundPlayDodgeAnimationMessage;
 import fuzs.quickdodge.common.network.ServerboundTriggerDodgeMessage;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,7 +47,7 @@ public class QuickDodge implements ModConstructor {
 
     @Override
     public void onRegisterEntityAttributes(EntityAttributesContext context) {
-        context.registerAttribute(EntityType.PLAYER,
+        context.registerAttribute(EntityTypes.PLAYER,
                 ModRegistry.DODGE_STRENGTH_ATTRIBUTE,
                 QuickDodge.CONFIG.get(CommonConfig.class).dodgeStrength);
     }

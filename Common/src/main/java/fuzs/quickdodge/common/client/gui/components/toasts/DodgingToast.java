@@ -44,7 +44,7 @@ public class DodgingToast extends TutorialToast {
             if (timeWaiting < 100 && ++timeWaiting == 100) {
                 ModConfigSpec.BooleanValue displayTutorial = QuickDodge.CONFIG.get(ClientConfig.class).displayTutorial;
                 if (displayTutorial.get()) {
-                    minecraft.getToastManager().addToast(new DodgingToast(minecraft.font));
+                    minecraft.gui.toastManager().addToast(new DodgingToast(minecraft.font));
                     displayTutorial.set(false);
                     displayTutorial.save();
                 }
