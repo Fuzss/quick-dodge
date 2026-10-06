@@ -9,7 +9,6 @@ import fuzs.quickdodge.common.QuickDodge;
 import fuzs.quickdodge.common.attachment.DodgeData;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -68,10 +67,7 @@ public class ModRegistry {
     public static final ResourceKey<Enchantment> SHOCKSTEP_ENCHANTMENT = REGISTRIES.registerEnchantment("shockstep");
 
     public static final DataAttachmentType<Entity, DodgeData> DODGE_DATA_ATTACHMENT_TYPE = DataAttachmentRegistry.<DodgeData>entityBuilder()
-            .defaultValue((Entity entity) -> entity.is(EntityTypeIds.PLAYER), (RegistryAccess registries) -> {
-                // This is mutable, so we need a new instance everytime.
-                return new DodgeData();
-            })
+            .defaultValue(EntityTypeIds.PLAYER, DodgeData.DEFAULT)
             .build(QuickDodge.id("dodge_data"));
 
     public static void bootstrap() {

@@ -11,7 +11,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
-import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 
@@ -25,33 +24,37 @@ public class DodgeEffectsHandler {
      */
     public static final int DODGE_ANIMATION_TICKS = 15;
 
-    @Nullable
-    private static AABB originalBoundingBox;
-
     public static void onStartPlayerTick(Player player) {
-        originalBoundingBox = player.getBoundingBox();
+        DodgeData dodgeData = ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.getOrDefault(player, DodgeData.DEFAULT);
+        if (dodgeData.isDodging()) {
+            DodgeData.Mutable mutable = dodgeData.mutable();
+            mutable.setOriginalBoundingBox(player.getBoundingBox());
+            ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.set(player, mutable.toImmutable());
+        }
     }
 
     public static void onPlayerTickEnd(Player player) {
-        DodgeData dodgeData = ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.get(player);
-        if (dodgeData != null && dodgeData.remainingDodgeTicks().intValue() > 0) {
-            dodgeData.remainingDodgeTicks().decrement();
-            if (originalBoundingBox != null) {
-                checkBashAttack(player, originalBoundingBox, dodgeData);
+        DodgeData dodgeData = ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.getOrDefault(player, DodgeData.DEFAULT);
+        if (dodgeData.isDodging()) {
+            DodgeData.Mutable mutable = dodgeData.mutable();
+            mutable.decrementRemainingDodgeTicks();
+            if (mutable.getOriginalBoundingBox() != null) {
+                checkBashAttack(player, mutable.getOriginalBoundingBox(), mutable);
             }
 
-            if (dodgeData.remainingDodgeTicks().intValue() == 0) {
-                dodgeData.bashedEntityIds().clear();
+            if (mutable.getRemainingDodgeTicks() == 0) {
+                mutable.clearBashedEntityIds();
+                mutable.setOriginalBoundingBox(null);
             }
+
+            ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.set(player, mutable.toImmutable());
         }
-
-        originalBoundingBox = null;
     }
 
     /**
      * @see LivingEntity#checkAutoSpinAttack(AABB, AABB)
      */
-    private static void checkBashAttack(Player player, AABB boundingBoxBeforeBash, DodgeData dodgeData) {
+    private static void checkBashAttack(Player player, AABB boundingBoxBeforeBash, DodgeData.Mutable dodgeData) {
         AABB aABB = boundingBoxBeforeBash.minmax(player.getBoundingBox());
         // we need this on the client, so it has to be an unfiltered value
         int entityBashingBonus = (int) EnchantingHelper.getUnfilteredValueEffectBonus(player,
@@ -68,7 +71,7 @@ public class DodgeEffectsHandler {
                                     ModRegistry.BASHING_DAMAGE_ENCHANTMENT_EFFECT_COMPONENT_TYPE.value());
                             attackEntityWithDamage(player, entity, bashingDamageBonus);
                         }
-                        dodgeData.bashedEntityIds().add(entity.getId());
+                        dodgeData.addBashedEntityId(entity.getId());
                         if (dodgeData.bashedEntityIds().size() == entityBashingBonus) {
                             player.setDeltaMovement(player.getDeltaMovement().scale(-0.2));
                             break;
@@ -81,7 +84,7 @@ public class DodgeEffectsHandler {
         }
 
         if (player.horizontalCollision) {
-            dodgeData.remainingDodgeTicks().setValue(0);
+            dodgeData.setRemainingDodgeTicks(0);
         }
     }
 
@@ -100,15 +103,15 @@ public class DodgeEffectsHandler {
 
     public static void setDodging(Player player) {
         if (QuickDodge.CONFIG.get(ServerConfig.class).shrinkSizeWhilstDodging) {
-            DodgeData dodgeData = ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.get(player);
-            if (dodgeData != null) {
-                dodgeData.remainingDodgeTicks().setValue(DODGE_MOMENTUM_TICKS);
-            }
+            DodgeData.Mutable mutable = ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.getOrDefault(player, DodgeData.DEFAULT)
+                    .mutable();
+            mutable.setRemainingDodgeTicks(DODGE_MOMENTUM_TICKS);
+            mutable.setOriginalBoundingBox(player.getBoundingBox());
+            ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.set(player, mutable.toImmutable());
         }
     }
 
     public static boolean isDodging(Player player) {
-        DodgeData dodgeData = ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.get(player);
-        return dodgeData != null && dodgeData.remainingDodgeTicks().intValue() > 0;
+        return ModRegistry.DODGE_DATA_ATTACHMENT_TYPE.getOrDefault(player, DodgeData.DEFAULT).isDodging();
     }
 }
