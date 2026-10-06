@@ -27,6 +27,14 @@
             ]
         },
         {
+            "name": "playeranimationlibrary",
+            "type": "required",
+            "platforms": [
+                "fabric",
+                "neoforge"
+            ]
+        },
+        {
             "name": "puzzleslib",
             "type": "required",
             "platforms": [
