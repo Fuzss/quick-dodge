@@ -4,14 +4,10 @@ plugins {
 
 configurations.configureEach {
     resolutionStrategy {
+        force("com.google.code.gson:gson:2.13.2")
+        force("org.slf4j:slf4j-api:2.0.17")
         force("io.netty:netty-buffer:4.2.7.Final")
-    }
-}
-
-repositories {
-    maven {
-        name = "RedlanceMinecraft"
-        url = uri("https://repo.redlance.org/public")
+        force("org.joml:joml:1.10.8")
     }
 }
 
