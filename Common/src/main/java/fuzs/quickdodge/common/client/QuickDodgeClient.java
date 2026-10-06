@@ -11,6 +11,7 @@ import fuzs.puzzleslib.common.api.client.key.v1.KeyMappingHelper;
 import fuzs.quickdodge.common.QuickDodge;
 import fuzs.quickdodge.common.client.gui.components.toasts.DodgingToast;
 import fuzs.quickdodge.common.client.handler.MovementInputHandler;
+import fuzs.quickdodge.common.client.handler.PlayerAnimationHandler;
 import fuzs.quickdodge.common.config.ClientConfig;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -32,8 +33,7 @@ public class QuickDodgeClient implements ClientModConstructor {
 
     @Override
     public void onClientSetup() {
-        // TODO enable this again
-//        PlayerAnimationHandler.registerPlayerAnimations();
+        PlayerAnimationHandler.registerPlayerAnimations();
     }
 
     @Override
