@@ -2,9 +2,8 @@ package fuzs.quickdodge.common.init;
 
 import fuzs.puzzleslib.common.api.attachment.v4.DataAttachmentRegistry;
 import fuzs.puzzleslib.common.api.attachment.v4.DataAttachmentType;
-import fuzs.puzzleslib.common.api.data.v2.AbstractDatapackRegistriesProvider;
+import fuzs.puzzleslib.common.api.init.v3.registry.ContentRegistrationHelper;
 import fuzs.puzzleslib.common.api.init.v3.registry.RegistryManager;
-import fuzs.puzzleslib.common.api.init.v3.registry.ResourceKeyHelper;
 import fuzs.quickdodge.common.QuickDodge;
 import fuzs.quickdodge.common.attachment.DodgeData;
 import net.minecraft.core.Holder;
@@ -13,6 +12,7 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
@@ -76,7 +76,7 @@ public class ModRegistry {
 
     public static void bootstrapEnchantments(BootstrapContext<Enchantment> context) {
         HolderGetter<Item> itemLookup = context.lookup(Registries.ITEM);
-        AbstractDatapackRegistriesProvider.registerEnchantment(context,
+        ContentRegistrationHelper.registerEnchantment(context,
                 FLEETFOOT_ENCHANTMENT,
                 Enchantment.enchantment(Enchantment.definition(itemLookup.getOrThrow(ItemTags.FOOT_ARMOR_ENCHANTABLE),
                                 2,
@@ -86,11 +86,11 @@ public class ModRegistry {
                                 4,
                                 EquipmentSlotGroup.FEET))
                         .withEffect(EnchantmentEffectComponents.ATTRIBUTES,
-                                new EnchantmentAttributeEffect(ResourceKeyHelper.getIdentifier(FLEETFOOT_ENCHANTMENT),
+                                new EnchantmentAttributeEffect(getId(FLEETFOOT_ENCHANTMENT),
                                         DODGE_STRENGTH_ATTRIBUTE,
                                         LevelBasedValue.perLevel(0.3F),
                                         AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-        AbstractDatapackRegistriesProvider.registerEnchantment(context,
+        ContentRegistrationHelper.registerEnchantment(context,
                 AIRSTRIDE_ENCHANTMENT,
                 Enchantment.enchantment(Enchantment.definition(itemLookup.getOrThrow(ItemTags.LEG_ARMOR_ENCHANTABLE),
                                 1,
@@ -100,7 +100,7 @@ public class ModRegistry {
                                 8,
                                 EquipmentSlotGroup.LEGS))
                         .withEffect(DODGE_WHILST_AIRBORNE_ENCHANTMENT_EFFECT_COMPONENT_TYPE.value()));
-        AbstractDatapackRegistriesProvider.registerEnchantment(context,
+        ContentRegistrationHelper.registerEnchantment(context,
                 SHOCKSTEP_ENCHANTMENT,
                 Enchantment.enchantment(Enchantment.definition(itemLookup.getOrThrow(ItemTags.CHEST_ARMOR_ENCHANTABLE),
                                 10,
@@ -113,5 +113,9 @@ public class ModRegistry {
                                 new AddValue(LevelBasedValue.perLevel(1.0F)))
                         .withEffect(BASHING_DAMAGE_ENCHANTMENT_EFFECT_COMPONENT_TYPE.value(),
                                 new AddValue(LevelBasedValue.perLevel(4.0F, 2.0F))));
+    }
+
+    private static Identifier getId(ResourceKey<?> resourceKey) {
+        return resourceKey.identifier().withPrefix(Registries.elementsDirPath(resourceKey.registryKey()) + ".");
     }
 }

@@ -1,7 +1,7 @@
 package fuzs.quickdodge.neoforge.client;
 
 import fuzs.puzzleslib.common.api.client.core.v1.ClientModConstructor;
-import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
+import fuzs.puzzleslib.neoforge.api.data.v3.core.DataProviderBuilder;
 import fuzs.quickdodge.common.QuickDodge;
 import fuzs.quickdodge.common.client.QuickDodgeClient;
 import fuzs.quickdodge.common.data.client.ModLanguageProvider;
@@ -14,6 +14,6 @@ public class QuickDodgeNeoForgeClient {
 
     public QuickDodgeNeoForgeClient() {
         ClientModConstructor.construct(QuickDodge.MOD_ID, QuickDodgeClient::new);
-        DataProviderHelper.registerDataProviders(QuickDodge.MOD_ID, ModLanguageProvider::new, ModSoundProvider::new);
+        DataProviderBuilder.of(QuickDodge.MOD_ID).addProvider(ModLanguageProvider::new, ModSoundProvider::new);
     }
 }

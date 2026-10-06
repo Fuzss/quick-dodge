@@ -42,8 +42,8 @@ public record ServerboundTriggerDodgeMessage(DodgeDirection dodgeDirection) impl
                     serverLevel.broadcastEntityEvent(serverPlayer, EntityEvent.POOF);
                 }
 
-                serverPlayer.invulnerableTime = Math.max(serverPlayer.invulnerableTime,
-                        QuickDodge.CONFIG.get(ServerConfig.class).invincibilityTicks);
+                serverPlayer.setInvulnerableTime(Math.max(serverPlayer.getInvulnerableTime(),
+                        QuickDodge.CONFIG.get(ServerConfig.class).invincibilityTicks));
                 DodgeEffectsHandler.setDodging(serverPlayer);
                 MessageSender.broadcast(PlayerSet.nearPlayer(serverPlayer),
                         new ClientboundPlayDodgeAnimationMessage(serverPlayer.getId(),

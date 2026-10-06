@@ -1,7 +1,7 @@
 package fuzs.quickdodge.neoforge;
 
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
-import fuzs.puzzleslib.neoforge.api.data.v2.core.DataProviderHelper;
+import fuzs.puzzleslib.neoforge.api.data.v3.core.DataProviderBuilder;
 import fuzs.quickdodge.common.QuickDodge;
 import fuzs.quickdodge.common.data.tags.ModEnchantmentTagsProvider;
 import fuzs.quickdodge.common.init.ModRegistry;
@@ -12,8 +12,8 @@ public class QuickDodgeNeoForge {
 
     public QuickDodgeNeoForge() {
         ModConstructor.construct(QuickDodge.MOD_ID, QuickDodge::new);
-        DataProviderHelper.registerDataProviders(QuickDodge.MOD_ID,
-                ModRegistry.REGISTRY_SET_BUILDER,
-                ModEnchantmentTagsProvider::new);
+        DataProviderBuilder.of(QuickDodge.MOD_ID)
+                .setRegistrySetBuilder(ModRegistry.REGISTRY_SET_BUILDER)
+                .addProvider(ModEnchantmentTagsProvider::new);
     }
 }
